@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Aimway · Learn. Grow. Progress.</title>
+  <meta name="description" content="Aimway is an iPhone app for learning something new every day. Pass short topic quizzes in Geography, History, Biology, Chemistry, Physics and General Knowledge, and watch your progress climb a one-year journey.">
+  <meta name="theme-color" content="#211A63">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Aimway · Learn. Grow. Progress.">
+  <meta property="og:description" content="Learn a little every day across six subjects and see your progress as a journey.">
+  <meta property="og:image" content="assets/img/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="assets/img/favicon.ico" sizes="32x32">
+  <link rel="icon" href="assets/img/favicon-48.png" type="image/png" sizes="48x48">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+  <link rel="preload" href="assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/main.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- Lucide icons (ISC license), one outline family as in the app -->
+  <svg class="sprite" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></symbol>
+    <symbol id="i-landmark" viewBox="0 0 24 24"><path d="M3 22h18"/><path d="M6 18v-7"/><path d="M10 18v-7"/><path d="M14 18v-7"/><path d="M18 18v-7"/><path d="M12 2 20 7H4z"/></symbol>
+    <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></symbol>
+    <symbol id="i-flask" viewBox="0 0 24 24"><path d="M10 2v7.527a2 2 0 0 1-.211.896L4.72 20.55a1 1 0 0 0 .9 1.45h12.76a1 1 0 0 0 .9-1.45l-5.069-10.127A2 2 0 0 1 14 9.527V2"/><path d="M8.5 2h7"/><path d="M7 16h10"/></symbol>
+    <symbol id="i-atom" viewBox="0 0 24 24"><circle cx="12" cy="12" r="1"/><path d="M20.2 20.2c2.04-2.03.02-7.36-4.5-11.9-4.54-4.52-9.87-6.54-11.9-4.5-2.04 2.03-.02 7.36 4.5 11.9 4.54 4.52 9.87 6.54 11.9 4.5Z"/><path d="M15.7 15.7c4.52-4.54 6.54-9.87 4.5-11.9-2.03-2.04-7.36-.02-11.9 4.5-4.52 4.54-6.54 9.87-4.5 11.9 2.03 2.04 7.36.02 11.9-4.5Z"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></symbol>
+    <symbol id="i-flame" viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-check-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-map" viewBox="0 0 24 24"><path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z"/><path d="M15 5.764v15"/><path d="M9 3.236v15"/></symbol>
+    <symbol id="i-house" viewBox="0 0 24 24"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></symbol>
+    <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M21 4h-7"/><path d="M10 4H3"/><path d="M21 12h-9"/><path d="M8 12H3"/><path d="M21 20h-5"/><path d="M12 20H3"/><path d="M14 2v4"/><path d="M8 10v4"/><path d="M16 18v4"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="m9 16 2 2 4-4"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+    <symbol id="i-crown" viewBox="0 0 24 24"><path d="M11.562 3.266a.5.5 0 0 1 .876 0L15.39 8.87a1 1 0 0 0 1.516.294L21.183 5.5a.5.5 0 0 1 .798.519l-2.834 10.246a1 1 0 0 1-.956.734H5.81a1 1 0 0 1-.957-.734L2.02 6.02a.5.5 0 0 1 .798-.519l4.276 3.664a1 1 0 0 0 1.516-.294z"/><path d="M5 21h14"/></symbol>
+    <symbol id="i-eye-off" viewBox="0 0 24 24"><path d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49"/><path d="M14.084 14.158a3 3 0 0 1-4.242-4.242"/><path d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143"/><path d="m2 2 20 20"/></symbol>
+    <symbol id="i-flag" viewBox="0 0 24 24"><path d="M4 22V4a1 1 0 0 1 .4-.8A6 6 0 0 1 8 2c3 0 5 2 7.333 2q2 0 3.067-.8A1 1 0 0 1 20 4v10a1 1 0 0 1-.4.8A6 6 0 0 1 16 16c-3 0-5-2-8-2a6 6 0 0 0-4 1.528"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+  </svg>
+
+  <header class="site-header" data-header>
+    <div class="container header-inner">
+      <a class="brand" href="#top" aria-label="Aimway home">
+        <img src="assets/img/aimway-icon-256.webp" alt="" width="36" height="36">
+        <span>Aimway</span>
+      </a>
+      <nav class="site-nav" id="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#journey">Journey</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#pro">Free &amp; Pro</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </nav>
+      <a class="btn btn-small btn-primary header-cta" href="#get">Get Aimway</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu" data-nav-toggle>
+        <svg class="icon"><use href="#i-menu"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- HERO -->
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow eyebrow-on-dark"><span class="dot" aria-hidden="true"></span> Coming soon to iPhone</p>
+          <h1 id="hero-title">Learn a little.<br><span class="grad">Climb every day.</span></h1>
+          <p class="lead">Aimway turns a few minutes of daily curiosity into visible, lasting progress. Pass short quizzes across six subjects and watch your journey rise, one step at a time.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary btn-glow" href="#get">Get notified at launch</a>
+            <a class="btn btn-ghost-dark" href="#how">See how it works</a>
+          </div>
+          <ul class="hero-points">
+            <li><svg class="icon"><use href="#i-check"/></svg> 15-question topic quizzes</li>
+            <li><svg class="icon"><use href="#i-check"/></svg> A one-year journey map</li>
+            <li><svg class="icon"><use href="#i-check"/></svg> Free to start</li>
+          </ul>
+        </div>
+
+        <!-- Home screen mockup -->
+        <div class="hero-visual">
+          <figure class="phone">
+            <div class="phone-screen">
+              <div class="ph-status" aria-hidden="true"><span>9:41</span><span class="island"></span><span class="bat"></span></div>
+              <div class="ph-body">
+                <div class="ph-brand"><img src="assets/img/aimway-icon-256.webp" alt="" width="22" height="22"> Aimway</div>
+                <p class="ph-hello">Good morning, Alex</p>
+                <p class="ph-sub">What would you like to learn today?</p>
+                <div class="ph-today">
+                  <div class="ph-today-row">
+                    <span class="ph-today-title">Today</span>
+                    <span class="ph-today-count">2 of 3 topics</span>
+                  </div>
+                  <div class="bar" aria-hidden="true"><span style="width:66%"></span></div>
+                  <div class="ph-streak"><svg class="icon"><use href="#i-flame"/></svg> 12-day streak <span>Next bonus in 18 days</span></div>
+                </div>
+                <p class="ph-section">Choose a topic</p>
+                <div class="ph-grid">
+                  <div class="ph-card s-geo"><svg class="icon"><use href="#i-globe"/></svg><span>Geography</span></div>
+                  <div class="ph-card s-his"><svg class="icon"><use href="#i-landmark"/></svg><span>History</span></div>
+                  <div class="ph-card s-bio"><svg class="icon"><use href="#i-leaf"/></svg><span>Biology</span></div>
+                  <div class="ph-card s-che"><svg class="icon"><use href="#i-flask"/></svg><span>Chemistry</span></div>
+                  <div class="ph-card s-phy"><svg class="icon"><use href="#i-atom"/></svg><span>Physics</span></div>
+                  <div class="ph-card s-gk"><svg class="icon"><use href="#i-book"/></svg><span>General Knowledge</span></div>
+                </div>
+              </div>
+              <div class="ph-tabs" aria-hidden="true">
+                <span class="on"><svg class="icon"><use href="#i-house"/></svg>Home</span>
+                <span><svg class="icon"><use href="#i-map"/></svg>Journey</span>
+                <span><svg class="icon"><use href="#i-sliders"/></svg>Settings</span>
+              </div>
+            </div>
+            <figcaption class="sr-only">Home shows today's goal, your learning streak and the topics you can study.</figcaption>
+          </figure>
+          <div class="float-chip chip-xp" aria-hidden="true"><svg class="icon"><use href="#i-star"/></svg> +10 XP · topic passed</div>
+          <div class="float-chip chip-step" aria-hidden="true"><svg class="icon"><use href="#i-arrow"/></svg> +1 step on your journey</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SUBJECTS -->
+    <section class="section subjects" aria-labelledby="subjects-title">
+      <div class="container">
+        <div class="section-head center reveal">
+          <p class="eyebrow">Six subjects to start</p>
+          <h2 id="subjects-title">Pick what you're curious about today</h2>
+          <p class="section-lead">Every subject is packed with short topics. More subjects are on the way.</p>
+        </div>
+        <ul class="subject-grid">
+          <li class="subject s-geo reveal"><svg class="icon"><use href="#i-globe"/></svg><h3>Geography</h3><p>Countries, capitals, rivers and the shape of the world.</p></li>
+          <li class="subject s-his reveal"><svg class="icon"><use href="#i-landmark"/></svg><h3>History</h3><p>Empires, inventions and the people who changed things.</p></li>
+          <li class="subject s-bio reveal"><svg class="icon"><use href="#i-leaf"/></svg><h3>Biology</h3><p>Cells, animals, plants and how the body works.</p></li>
+          <li class="subject s-che reveal"><svg class="icon"><use href="#i-flask"/></svg><h3>Chemistry</h3><p>Elements, reactions and the stuff everything is made of.</p></li>
+          <li class="subject s-phy reveal"><svg class="icon"><use href="#i-atom"/></svg><h3>Physics</h3><p>Forces, light, energy and the rules of the universe.</p></li>
+          <li class="subject s-gk reveal"><svg class="icon"><use href="#i-book"/></svg><h3>General Knowledge</h3><p>A bit of everything, for the curious all-rounder.</p></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="section how" id="how" aria-labelledby="how-title">
+      <div class="container">
+        <div class="section-head center reveal">
+          <p class="eyebrow">How it works</p>
+          <h2 id="how-title">Three steps. A few minutes a day.</h2>
+        </div>
+        <ol class="steps">
+          <li class="step reveal">
+            <span class="step-num" aria-hidden="true">1</span>
+            <h3>Choose a topic</h3>
+            <p>Open Aimway and tap any subject. Set a daily goal of one to three topics, whatever fits your day.</p>
+          </li>
+          <li class="step reveal">
+            <span class="step-num" aria-hidden="true">2</span>
+            <h3>Take a 15-question quiz</h3>
+            <p>Answer 15 multiple-choice questions. Score 80% or more (12 of 15) to pass. Every retry brings a fresh set of questions.</p>
+          </li>
+          <li class="step reveal">
+            <span class="step-num" aria-hidden="true">3</span>
+            <h3>Review and move forward</h3>
+            <p>See what you got wrong with the right answers explained. Each pass moves you one step up your journey and earns 10&nbsp;XP.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- JOURNEY -->
+    <section class="section journey dark" id="journey" aria-labelledby="journey-title">
+      <div class="container split">
+        <div class="split-copy reveal">
+          <p class="eyebrow eyebrow-on-dark">The Journey</p>
+          <h2 id="journey-title">A one-year climb, drawn as you learn</h2>
+          <p>Your progress isn't a grade. It's a path up a mountain. Every passed topic adds a step, and the map grows upward toward a summit 389 steps away: one topic a day for a year, plus twelve monthly exams.</p>
+          <ul class="ticks">
+            <li><svg class="icon"><use href="#i-check-circle"/></svg><span><strong>Monthly regions.</strong> Each calendar month is a new region of the map, ending in a checkpoint.</span></li>
+            <li><svg class="icon"><use href="#i-check-circle"/></svg><span><strong>Combos.</strong> Pass three topics in a row on the same day for an extra step and +20&nbsp;XP.</span></li>
+            <li><svg class="icon"><use href="#i-check-circle"/></svg><span><strong>Friends on the map.</strong> See where your friends are on their own climb, right on your path.</span></li>
+          </ul>
+        </div>
+
+        <figure class="phone phone-journey reveal">
+          <div class="phone-screen">
+            <div class="ph-status" aria-hidden="true"><span>9:41</span><span class="island"></span><span class="bat"></span></div>
+            <div class="ph-body">
+              <div class="ph-jhead"><span>Your Journey</span><span class="ph-pill"><svg class="icon"><use href="#i-users"/></svg>Invite</span></div>
+              <div class="ph-map">
+                <svg viewBox="0 0 260 300" preserveAspectRatio="xMidYMax slice" role="img" aria-label="Winding path with three completed steps, the current step and upcoming steps">
+                  <defs>
+                    <linearGradient id="mapbg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EEE8FF"/><stop offset="1" stop-color="#E2F7E8"/></linearGradient>
+                  </defs>
+                  <rect width="260" height="300" rx="14" fill="url(#mapbg)"/>
+                  <path d="M0 120 Q60 80 120 110 T260 90 V300 H0Z" fill="#DCE6FF" opacity=".55"/>
+                  <path d="M0 200 Q80 160 150 190 T260 170 V300 H0Z" fill="#DDF6FA" opacity=".7"/>
+                  <path d="M60 290 C40 240 170 240 160 200 S70 160 100 120 S200 90 170 40" fill="none" stroke="#E4E5F0" stroke-width="5" stroke-linecap="round" stroke-dasharray="2 10"/>
+                  <path d="M60 290 C40 240 170 240 160 200 S70 160 100 120" fill="none" stroke="#7257F5" stroke-width="5" stroke-linecap="round"/>
+                  <g class="node done"><circle cx="66" cy="262" r="11"/><path d="M61 262l3.5 3.5 6-6.5"/></g>
+                  <g class="node done"><circle cx="150" cy="226" r="11"/><path d="M145 226l3.5 3.5 6-6.5"/></g>
+                  <g class="node done"><circle cx="120" cy="170" r="11"/><path d="M115 170l3.5 3.5 6-6.5"/></g>
+                  <circle cx="100" cy="120" r="21" fill="#EEE8FF"/>
+                  <circle cx="100" cy="120" r="14" fill="#7257F5"/>
+                  <path transform="translate(92 112) scale(.67)" d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" fill="#fff"/>
+                  <rect x="124" y="108" width="52" height="20" rx="10" fill="#fff" stroke="#E4E5F0"/>
+                  <text x="150" y="122" text-anchor="middle" font-size="10" font-weight="600" fill="#211A63">Current</text>
+                  <circle cx="160" cy="80" r="8" fill="#fff" stroke="#E4E5F0" stroke-width="2"/>
+                  <circle cx="176" cy="44" r="8" fill="#fff" stroke="#E4E5F0" stroke-width="2"/>
+                  <g><circle cx="200" cy="208" r="13" fill="#211A63" stroke="#fff" stroke-width="2"/><text x="200" y="212" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">SA</text></g>
+                  <text x="200" y="236" text-anchor="middle" font-size="9" font-weight="600" fill="#211A63">Sarah</text>
+                </svg>
+              </div>
+              <div class="ph-progress">
+                <div class="ph-today-row"><span class="ph-today-title">November region</span><span class="ph-today-count">34 of 389 steps</span></div>
+                <div class="bar" aria-hidden="true"><span style="width:9%"></span></div>
+              </div>
+              <div class="ph-lb">
+                <div class="ph-lb-row"><span class="rk">1</span><span class="av">SA</span><span class="nm">Sarah</span><span class="xp">420 XP</span></div>
+                <div class="ph-lb-row me"><span class="rk">2</span><span class="av">AL</span><span class="nm">Alex · You</span><span class="xp">380 XP</span></div>
+              </div>
+            </div>
+            <div class="ph-tabs" aria-hidden="true">
+              <span><svg class="icon"><use href="#i-house"/></svg>Home</span>
+              <span class="on"><svg class="icon"><use href="#i-map"/></svg>Journey</span>
+              <span><svg class="icon"><use href="#i-sliders"/></svg>Settings</span>
+            </div>
+          </div>
+          <figcaption class="sr-only">The Journey map shows completed steps with checkmarks, your current step, the steps ahead and where your friends are.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="section features" id="features" aria-labelledby="features-title">
+      <div class="container">
+        <div class="section-head center reveal">
+          <p class="eyebrow">Built for steady progress</p>
+          <h2 id="features-title">Motivating, never noisy</h2>
+          <p class="section-lead">Just enough to keep you coming back. No pressure, no shaming, no endless badges.</p>
+        </div>
+        <div class="feature-grid">
+          <article class="feature reveal">
+            <span class="f-icon f-flame"><svg class="icon"><use href="#i-flame"/></svg></span>
+            <h3>Learning streak</h3>
+            <p>Pass at least one quiz a day to keep your streak. Today never breaks it, and your best streak is always kept.</p>
+            <ul class="milestones">
+              <li><strong>7</strong> days <span>+50 XP</span></li>
+              <li><strong>30</strong> days <span>+150 XP</span></li>
+              <li><strong>100</strong> days <span>+500 XP</span></li>
+              <li><strong>365</strong> days <span>+1000 XP</span></li>
+            </ul>
+          </article>
+          <article class="feature reveal">
+            <span class="f-icon f-cal"><svg class="icon"><use href="#i-calendar"/></svg></span>
+            <h3>Monthly exam</h3>
+            <p>Each month ends with a 20-question exam that mixes everything you studied. Pass it in its month for +2 steps and +100&nbsp;XP, and unlock the next region. Results live in a calendar you can look back on.</p>
+          </article>
+          <article class="feature reveal">
+            <span class="f-icon f-check"><svg class="icon"><use href="#i-check-circle"/></svg></span>
+            <h3>Learn from every answer</h3>
+            <p>Every quiz and exam ends with an answer review: which questions you missed, what you picked, the right answer and a short explanation.</p>
+          </article>
+          <article class="feature reveal">
+            <span class="f-icon f-users"><svg class="icon"><use href="#i-users"/></svg></span>
+            <h3>Friends &amp; leaderboard</h3>
+            <p>Invite friends with your personal code and compare XP. Your leaderboard shows you and your direct friends only, never friends of friends.</p>
+          </article>
+          <article class="feature reveal">
+            <span class="f-icon f-eye"><svg class="icon"><use href="#i-eye-off"/></svg></span>
+            <h3>Privacy you control</h3>
+            <p>Friends see your name, avatar and XP. Never your email. Turn off "Show me to friends" any time and you disappear from their map and board.</p>
+          </article>
+          <article class="feature reveal">
+            <span class="f-icon f-flag"><svg class="icon"><use href="#i-flag"/></svg></span>
+            <h3>Better questions, together</h3>
+            <p>Spot a wrong answer, a typo or something out of date? Report any question in one tap and we'll check it.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- FREE & PRO -->
+    <section class="section pro" id="pro" aria-labelledby="pro-title">
+      <div class="container">
+        <div class="section-head center reveal">
+          <p class="eyebrow">Free &amp; Pro</p>
+          <h2 id="pro-title">Start free. Go further with Pro.</h2>
+          <p class="section-lead">The full journey is free. Pro removes the daily limits and adds the monthly exam.</p>
+        </div>
+        <div class="plans">
+          <article class="plan reveal" aria-labelledby="plan-free">
+            <h3 id="plan-free">Free</h3>
+            <p class="plan-sub">Everything you need to build the habit.</p>
+            <ul class="plan-list">
+              <li><svg class="icon"><use href="#i-check"/></svg>All six subjects</li>
+              <li><svg class="icon"><use href="#i-check"/></svg><span><strong>3</strong> different topics a day</span></li>
+              <li><svg class="icon"><use href="#i-check"/></svg><span><strong>1</strong> retry a day</span></li>
+              <li><svg class="icon"><use href="#i-check"/></svg>Journey map, streak and combos</li>
+              <li><svg class="icon"><use href="#i-check"/></svg>Answer review after every quiz</li>
+              <li><svg class="icon"><use href="#i-check"/></svg>Friends and leaderboard</li>
+              <li class="no"><svg class="icon"><use href="#i-x"/></svg>Monthly exam</li>
+            </ul>
+          </article>
+          <article class="plan plan-pro reveal" aria-labelledby="plan-pro">
+            <span class="plan-badge"><svg class="icon"><use href="#i-crown"/></svg> Pro</span>
+            <h3 id="plan-pro">Aimway Pro</h3>
+            <p class="plan-sub">Climb without limits.</p>
+            <ul class="plan-list">
+              <li><svg class="icon"><use href="#i-check"/></svg>Everything in Free</li>
+              <li><svg class="icon"><use href="#i-check"/></svg><span><strong>Unlimited</strong> topics every day</span></li>
+              <li><svg class="icon"><use href="#i-check"/></svg><span><strong>Unlimited</strong> retries</span></li>
+              <li><svg class="icon"><use href="#i-check"/></svg><span><strong>Monthly exam</strong>: +2 steps and +100 XP</span></li>
+              <li><svg class="icon"><use href="#i-check"/></svg>Monthly and yearly plans</li>
+            </ul>
+            <p class="plan-note">Prices are shown in the App Store before you subscribe. Cancel any time in your Apple account.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section faq" id="faq" aria-labelledby="faq-title">
+      <div class="container narrow">
+        <div class="section-head center reveal">
+          <p class="eyebrow">FAQ</p>
+          <h2 id="faq-title">Questions, answered</h2>
+        </div>
+        <div class="faq-list">
+          <details class="reveal">
+            <summary>When can I download Aimway?<svg class="icon"><use href="#i-chevron"/></svg></summary>
+            <p>Aimway is in development for iPhone (iOS 17 or later) and launches on the App Store soon. Android may follow later.</p>
+          </details>
+          <details class="reveal">
+            <summary>How long does a quiz take?<svg class="icon"><use href="#i-chevron"/></svg></summary>
+            <p>A topic quiz is 15 multiple-choice questions, usually a few minutes. You see your score and an answer review at the end, not during the quiz.</p>
+          </details>
+          <details class="reveal">
+            <summary>What happens if I fail a quiz?<svg class="icon"><use href="#i-chevron"/></svg></summary>
+            <p>Nothing bad. You just don't move forward yet. Read the answer review, then try again with a fresh set of questions. Free includes one retry a day; Pro has unlimited retries. A retry doesn't use up one of your three daily topics.</p>
+          </details>
+          <details class="reveal">
+            <summary>When does a day reset?<svg class="icon"><use href="#i-chevron"/></svg></summary>
+            <p>At midnight in your own time zone. Daily limits, combos and your streak all follow your local day.</p>
+          </details>
+          <details class="reveal">
+            <summary>What happens if I miss the monthly exam?<svg class="icon"><use href="#i-chevron"/></svg></summary>
+            <p>You can still pass it during the following month for +1 step and +50&nbsp;XP. After that it closes. Your journey keeps going into the next region either way.</p>
+          </details>
+          <details class="reveal">
+            <summary>Does my progress follow me to a new phone?<svg class="icon"><use href="#i-chevron"/></svg></summary>
+            <p>Yes. Sign in with Apple, Google or email and your steps, XP and streak are tied to your account.</p>
+          </details>
+          <details class="reveal">
+            <summary>Is Aimway for kids?<svg class="icon"><use href="#i-chevron"/></svg></summary>
+            <p>Aimway is made for curious adults and older students who want to keep learning outside the classroom.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta dark" id="get" aria-labelledby="get-title">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="container cta-inner reveal">
+        <img src="assets/img/aimway-icon-512.webp" alt="Aimway app icon" width="112" height="112" class="cta-icon">
+        <h2 id="get-title">Small steps. Big knowledge.</h2>
+        <p>Aimway is coming soon to the App Store. Want to know the moment it launches, or join the beta? Drop us a line.</p>
+        <div class="hero-actions center">
+          <a class="btn btn-primary btn-glow" href="mailto:support@aimway.app?subject=Notify%20me%20when%20Aimway%20launches"><svg class="icon"><use href="#i-mail"/></svg> Notify me at launch</a>
+          <span class="store-soon" role="note">App Store: coming soon</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a class="brand" href="#top" aria-label="Aimway home"><img src="assets/img/aimway-icon-256.webp" alt="" width="32" height="32"><span>Aimway</span></a>
+        <p>Learn. Grow. Progress.</p>
+      </div>
+      <nav aria-label="Footer">
+        <ul class="footer-links">
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#pro">Free &amp; Pro</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="mailto:support@aimway.app">support@aimway.app</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="container footer-meta">
+      <p>© <span data-year>2026</span> Aimway. Terms and Privacy Policy coming soon.</p>
+      <p>Some quiz questions are adapted from <a href="https://opentdb.com/" rel="noopener">Open Trivia Database</a> under <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noopener license">CC BY-SA 4.0</a>.</p>
+    </div>
+  </footer>
+</body>
+</html>
