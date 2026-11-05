@@ -15,7 +15,7 @@ The public website for [Aimway](https://github.com/akhmeddovProfile/aimway): an 
 | [`site/js/main.js`](site/js/main.js) | Header state, mobile menu, reveal-on-scroll. No dependencies. |
 | [`site/assets/img/`](site/assets/img) | Web sizes of the official app icon, favicons, social preview image |
 | [`site/assets/fonts/`](site/assets/fonts) | Self-hosted Inter (variable, SIL OFL), so no request goes to Google Fonts |
-| [`.github/workflows/site.yml`](.github/workflows/site.yml) | CI: validates the HTML on every push, deploys `site/` to GitHub Pages from `main` |
+| [`.github/workflows/site.yml`](.github/workflows/site.yml) | CI: validates the HTML on every push, copies `site/` to the Aimway server from `main` |
 
 ## Run locally
 
@@ -27,11 +27,20 @@ python3 -m http.server 8000
 
 ## Deploy
 
-Pushes to `main` deploy automatically with GitHub Actions.
+The site runs on the Aimway server (Hetzner), next to the API: Caddy serves `/opt/aimway/site` with HTTPS
+(see `deploy/Caddyfile` and `docs/DEPLOY.md` in the backend repo). Pushes to `main` copy `site/` there
+with GitHub Actions.
 
-One-time setup: in the repository on GitHub, open **Settings → Pages** and set **Source** to **GitHub Actions**.
+One-time setup: the same three repository secrets as the backend repo (Settings → Secrets and variables → Actions):
 
-For a custom domain later (for example `aimway.app`), add it under Settings → Pages and a `site/CNAME` file containing the domain.
+```bash
+gh secret set DEPLOY_HOST -R akhmeddovProfile/aimway-landingpage --body "SERVER_IP"
+gh secret set DEPLOY_SSH_KEY -R akhmeddovProfile/aimway-landingpage < ~/.ssh/aimway_deploy
+ssh-keyscan -t ed25519 SERVER_IP | gh secret set DEPLOY_KNOWN_HOSTS -R akhmeddovProfile/aimway-landingpage
+```
+
+The address is `SITE_DOMAIN` in `/opt/aimway/.env` on the server (for now `www.95-217-10-98.sslip.io`).
+For a real domain, point its DNS at the server and change `SITE_DOMAIN` there.
 
 ## Content rules
 

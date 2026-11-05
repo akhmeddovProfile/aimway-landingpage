@@ -1,7 +1,7 @@
 name: Site
 
-# Validates the HTML on every push. Pushes to main also deploy site/ to GitHub Pages.
-# One-time setup: Settings → Pages → Source: GitHub Actions.
+# Validates the HTML on every push. Pushes to main also copy site/ to the Aimway server,
+# where Caddy serves it (aimwaybackend: deploy/Caddyfile). Needs the DEPLOY_* secrets (README).
 on:
   push:
   workflow_dispatch:
@@ -27,23 +27,49 @@ jobs:
         run: npx --yes html-validate@9 site/
 
   deploy:
-    name: Deploy to GitHub Pages
+    name: Deploy to the server
     needs: validate
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
     timeout-minutes: 10
-    permissions:
-      contents: read
-      pages: write
-      id-token: write
     environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      name: production
+      url: https://${{ steps.copy.outputs.domain }}
+    env:
+      DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: site
-      - id: deployment
-        uses: actions/deploy-pages@v4
+
+      - name: No server yet
+        if: env.DEPLOY_HOST == ''
+        run: echo "::notice::Set DEPLOY_HOST, DEPLOY_SSH_KEY and DEPLOY_KNOWN_HOSTS to deploy (README)."
+
+      - name: Set up SSH
+        if: env.DEPLOY_HOST != ''
+        run: |
+          install -d -m 700 ~/.ssh
+          echo "${{ secrets.DEPLOY_SSH_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          echo "${{ secrets.DEPLOY_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
+          printf 'Host server\n  HostName %s\n  User deploy\n  IdentityFile ~/.ssh/deploy_key\n' "$DEPLOY_HOST" > ~/.ssh/config
+
+      # Replaces the contents of /opt/aimway/site in place (Caddy serves that folder).
+      - name: Copy site/ to the server
+        id: copy
+        if: env.DEPLOY_HOST != ''
+        run: |
+          tar -C site -czf - . | ssh server 'set -e; mkdir -p /opt/aimway/site; cd /opt/aimway/site; find . -mindepth 1 -delete; tar -xzf -'
+          echo "domain=$(ssh server "grep '^SITE_DOMAIN=' /opt/aimway/.env | cut -d= -f2 | cut -d, -f1")" >> "$GITHUB_OUTPUT"
+
+      - name: Check the site answers
+        if: env.DEPLOY_HOST != ''
+        run: |
+          for i in $(seq 1 24); do
+            if curl -fsS -o /dev/null "https://${{ steps.copy.outputs.domain }}/"; then
+              echo "https://${{ steps.copy.outputs.domain }} is up"
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "::error::https://${{ steps.copy.outputs.domain }}/ didn't answer. Is the backend deployed with the landing page change?"
+          exit 1

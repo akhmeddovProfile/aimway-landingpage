@@ -3,7 +3,7 @@
 ## Git workflow
 - Commit and push **directly to `main`**. Do not create feature branches or pull requests unless Emin asks for one.
 - Before pushing, run `npx --yes html-validate@9 site/` and make sure CI (`.github/workflows/site.yml`) stays green after the push.
-- A push to `main` deploys the site to GitHub Pages.
+- A push to `main` copies `site/` to the Aimway server (Caddy serves it; backend repo `deploy/Caddyfile`).
 
 ## Project
 - Static site in `site/`: plain HTML, CSS, JS. No framework, no build step. Keep it that way unless Emin asks.
