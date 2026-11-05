@@ -48,4 +48,4 @@ For a real domain, point its DNS at the server and change `SITE_DOMAIN` there.
 - No prices on the site. Prices come from the App Store (OQ-11).
 - Terms and Privacy Policy pages are not published yet (OQ-16). The footer says "coming soon".
 - The App Store button stays "coming soon" until the app is live. Then replace it with Apple's official "Download on the App Store" badge and the real link.
-- Open Trivia DB questions are CC BY-SA 4.0, so the footer keeps the credit.
+- No content-source credits on the site: the site shows no questions. The Open Trivia DB credit (CC BY-SA 4.0) lives in the app (Settings → About).
